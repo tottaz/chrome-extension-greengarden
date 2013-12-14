@@ -1,0 +1,43 @@
+{
+  "manifest_version": 2,
+  "name": "Greengarden Extension for Chrome",
+  "version": "0.1.0",
+  "description": "Integrates Greengarden with your browsing experience.",
+  "icons": {
+    "128": "logo.png"
+  },
+  "minimum_chrome_version": "16",
+
+  "browser_action": {
+    "default_icon": "favicon.ico",
+    "default_title": "Greengarden",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "cookies",
+    "*://*.greengarden.com/*",
+    "*://localhost.org/*"
+  ],
+
+  "content_scripts": [{
+    "matches": [
+      "<all_urls>"
+    ],
+    "exclude_matches": [
+      "*://*.greengarden.com/*"
+    ],
+    "js": [
+      "greengarden.js",
+      "selection_client.js",
+      "quick_add_client.js"
+    ],
+    "run_at": "document_start",
+    "all_frames": false
+  }]
+}

@@ -1,0 +1,17 @@
+This is a free, open-source, sample application demonstrating use of the
+Greengarden API. It takes the form of a Chrome Extension that, when installed,
+integrates Greengarden into your web experience in the following ways:
+
+  * Creates a button in your button-bar which, when clicked, pops up a
+    QuickAdd window to create a new news item associated with the current web page.
+
+  * Installs the special Greengarden TAB+Q keyboard shortcut. When this key combo
+    is pressed from any web page, it brings up the same popup.
+
+To install:
+
+  1. Download the code, e.g. `git clone git://github.com/greengarden/Chrome-Extension-Greengarden.git`
+  2. Navigate chrome to `chrome://extensions`
+  3. Check the `Developer mode` toggle
+  4. Click on `Load Unpacked Extension...`
+  5. Select the folder containing the extension
