@@ -1,13 +1,13 @@
 <html>
 <head>
-  <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
-  <script type="text/javascript" src="jquery-ui-1.8.10.custom.min.js"></script>
-  <script type="text/javascript" src="greengarden.js"></script>
-  <script type="text/javascript" src="options.js"></script>
-  <script type="text/javascript" src="api_bridge.js"></script>
-  <script type="text/javascript" src="server_model.js"></script>
-  <link rel="stylesheet" href="common.css"/>
-  <link rel="stylesheet" href="popup_style.css"/>
+  <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.8.10.custom.min.js"></script>
+  <script type="text/javascript" src="js/greengarden.js"></script>
+  <script type="text/javascript" src="js/options.js"></script>
+  <script type="text/javascript" src="js/api_bridge.js"></script>
+  <script type="text/javascript" src="js/server_model.js"></script>
+  <link rel="stylesheet" href="css/common.css"/>
+  <link rel="stylesheet" href="css/popup_style.css"/>
 </head>
 
 <body>
@@ -26,23 +26,23 @@
     <div id="add_view" style="display:none">
       <table class="form">
         <tr>
-          <td class="field-name">Name:</td>
+          <td class="field-name">Title:</td>
           <td class="field-value">
-            <input id="name"/>
+            <input id="title"/>
           </td>
         </tr>
 
         <tr>
-          <td class="field-name">Notes:</td>
+          <td class="field-name">URL:</td>
           <td class="field-value">
-            <textarea id="notes"></textarea>
+            <textarea id="url"></textarea>
           </td>
         </tr>
 
         <tr>
-          <td class="field-name">Workspace:</td>
+          <td class="field-name">Category:</td>
           <td class="field-value">
-            <select id="workspace"><option>Loading...</option></select>
+            <select id="category"><option>Loading...</option></select>
           </td>
         </tr>
 
@@ -66,11 +66,11 @@
 
     <div id="success_view" style="display:none">
       <span class="success-icon"></span>
-      Create news <a id="new_task_link" target="_blank" href=""></a>.
+      Create news <a id="new_newsitem_link" target="_blank" href=""></a>.
     </div>
 
     <div id="login_view" style="display:none">
-      Please <a id="login_link" href="#">log into Greengarden</a> to start adding
+      You need to be logged in to <a id="login_link" href="http://localhost/greengarden/admin/users/login"> into Greengarden</a> to start adding
       news.
     </div>
 
@@ -79,6 +79,6 @@
 </body>
 
 <!-- Adds event handlers to elements, so we include at the end -->
-<script type="text/javascript" src="popup.js"></script>
+<script type="text/javascript" src="js/popup.js"></script>
 
 </html>

@@ -9,7 +9,7 @@ body, td, div {
   float: right;
   width: 14px;
   height: 14px;
-  background-image: url(sprite.png);
+  background-image: url(../img/sprite.png);
   background-position: 0px -100px;
   background-repeat: no-repeat;
 }

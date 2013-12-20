@@ -41,7 +41,7 @@ body {
   color: #ECF0F3;
 }
 .error-icon {
-  background-image: url(sprite.png);
+  background-image: url(../img/sprite.png);
   background-position: 0px 0px;
   background-repeat: no-repeat;
   width: 19px;
@@ -103,7 +103,7 @@ body {
     
 }
 .success-icon {
-  background-image: url(sprite.png);
+  background-image: url(img/sprite.png);
   background-position: 0px -50px;
   background-repeat: no-repeat;
   width: 19px;

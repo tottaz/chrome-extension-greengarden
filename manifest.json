@@ -4,12 +4,12 @@
   "version": "0.1.0",
   "description": "Integrates Greengarden with your browsing experience.",
   "icons": {
-    "128": "logo.png"
+    "128": "img/logo.png"
   },
   "minimum_chrome_version": "16",
 
   "browser_action": {
-    "default_icon": "favicon.ico",
+    "default_icon": "img/icon-16.png",
     "default_title": "Greengarden",
     "default_popup": "popup.html"
   },
@@ -21,8 +21,8 @@
     "tabs",
     "*://*/*",
     "cookies",
-    "*://*.greengarden.com/*",
-    "*://localhost.org/*"
+    "*://*.greenpeace.org/*",
+    "*://localhost/*"
   ],
 
   "content_scripts": [{
@@ -33,9 +33,9 @@
       "*://*.greengarden.com/*"
     ],
     "js": [
-      "greengarden.js",
-      "selection_client.js",
-      "quick_add_client.js"
+      "js/greengarden.js",
+      "js/selection_client.js",
+      "js/quick_add_client.js"
     ],
     "run_at": "document_start",
     "all_frames": false

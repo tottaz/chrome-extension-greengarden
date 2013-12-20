@@ -17,8 +17,8 @@ window.addEventListener('load', function() {
       // Now load our options ...
       Greengarden.ServerModel.options(function(options) {
         // And ensure the user is logged in ...
-        Greengarden.ServerModel.isLoggedIn(function(is_logged_in) {
-          if (is_logged_in) {
+//        Greengarden.ServerModel.isLoggedIn(function(is_logged_in) {
+//          if (is_logged_in) {
             if (window.quick_add_request) {
               // If this was a QuickAdd request (set by the code popping up
               // the window in Greengarden.ExtensionServer), then we have all the
@@ -55,11 +55,11 @@ window.addEventListener('load', function() {
                 showAddUi(tab.url, tab.title, selection, options);
               });
             }
-          } else {
+//          } else {
             // The user is not even logged in. Prompt them to do so!
-            showLogin(Greengarden.Options.loginUrl(options));
-          }
-        });
+//            showLogin(Greengarden.Options.loginUrl(options));
+//          }
+//        });
       });
     });
   });
@@ -76,21 +76,21 @@ var showView = function(name) {
 var showAddUi = function(url, title, selected_text, options) {
   var self = this;
   showView("add");
-  $("#notes").val(url + selected_text);
-  $("#name").val(title);
-  $("#name").focus();
-  $("#name").select();
+  $("#url").val(url + selected_text);
+  $("#title").val(title);
+  $("#title").focus();
+  $("#title").select();
   Greengarden.ServerModel.me(function(user) {
     // Just to cache result.
     Greengarden.ServerModel.workspaces(function(workspaces) {
-      $("#workspace").html("");
+      $("#category").html("");
       workspaces.forEach(function(workspace) {
-        $("#workspace").append(
+        $("#category").append(
             "<option value='" + workspace.id + "'>" + workspace.name + "</option>");
       });
-      $("#workspace").val(options.default_workspace_id);
+      $("#category").val(options.default_workspace_id);
       onWorkspaceChanged();
-      $("#workspace").change(onWorkspaceChanged);
+      $("#category").change(onWorkspaceChanged);
     });
   });
 };
@@ -152,23 +152,23 @@ var readAssignee = function() {
 };
 
 var readWorkspaceId = function() {
-  return $("#workspace").val();
+  return $("#category").val();
 };
 
-var createTask = function() {
-  console.info("Creating task");
+var createNewsitem = function() {
+  console.info("Creating News Item");
   hideError();
   setAddWorking(true);
   Greengarden.ServerModel.createTask(
       readWorkspaceId(),
       {
-        name: $("#name").val(),
-        notes: $("#notes").val(),
+        title: $("#title").val(),
+        url: $("#url").val(),
         assignee: readAssignee()
       },
-      function(task) {
+      function(newsitem) {
         setAddWorking(false);
-        showSuccess(task);
+        showSuccess(newsitem);
       },
       function(response) {
         setAddWorking(false);
@@ -185,14 +185,14 @@ var hideError = function() {
   $("#error").css("display", "none");
 };
 
-// Helper to show a success message after a task is added.
-var showSuccess = function(task) {
-  Greengarden.ServerModel.taskViewUrl(task, function(url) {
-    var name = task.name.replace(/^\s*/, "").replace(/\s*$/, "");
-    $("#new_task_link").attr("href", url);
-    $("#new_task_link").text(name !== "" ? name : "unnamed task");
-    $("#new_task_link").unbind("click");
-    $("#new_task_link").click(function() {
+// Helper to show a success message after a newsitem is added.
+var showSuccess = function(newsitem) {
+  Greengarden.ServerModel.newsitemViewUrl(newsitem, function(url) {
+    var name = newsitem.name.replace(/^\s*/, "").replace(/\s*$/, "");
+    $("#new_newsitem_link").attr("href", url);
+    $("#new_newsitem_link").text(name !== "" ? name : "unnamed newsitem");
+    $("#new_newsitem_link").unbind("click");
+    $("#new_newsitem_link").click(function() {
       chrome.tabs.create({url: url});
       window.close();
       return false;

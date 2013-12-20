@@ -15,7 +15,7 @@ Greengarden.ApiBridge = {
   /**
    * @type {String} Version of the Greengarden API to use.
    */
-  API_VERSION: "1.0",
+  API_VERSION: "1",
 
   /**
    * @param opt_options {dict} Options to use; if unspecified will be loaded.
@@ -42,7 +42,7 @@ Greengarden.ApiBridge = {
     var url = this.baseApiUrl() + path;
     chrome.cookies.get({
       url: url,
-      name: 'ticket'
+      name: 'gp_media'
     }, function(cookie) {
       if (!cookie) {
         callback({

@@ -28,5 +28,4 @@ Greengarden.ExtensionServer = {
       }
     });
   }
-
 };

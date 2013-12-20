@@ -4,9 +4,9 @@
  *
  *     greengarden_host_port {String} host and (optional) port of the greengarden
  *         server to connect to.
- *     default_workspace_id {Integer} ID of the workspace that tasks should
+ *     default_workspace_id {Integer} ID of the workspace that newsitems should
  *         go into by default. The user will be allowed to choose a
- *         different option when adding a task. This is 0 if no default
+ *         different option when adding a newsitem. This is 0 if no default
  *         workspace is selected.
  *
  * They are stored off in browser local storage for the extension as a
@@ -20,7 +20,7 @@ Greengarden.Options = {
    */
   loginUrl: function(opt_options) {
     var options = opt_options || Greengarden.Options.loadOptions();
-    return 'https://' + options.greengarden_host_port + '/';
+    return 'http://' + options.greengarden_host_port + '/';
   },
 
   /**
@@ -28,7 +28,7 @@ Greengarden.Options = {
    */
   defaultOptions: function() {
     return {
-      greengarden_host_port: "app.greengarden.com",
+      greengarden_host_port: "localhost",
       default_workspace_id: 0
     };
   },
@@ -68,5 +68,4 @@ Greengarden.Options = {
     delete localStorage.options;
     this.loadOptions();
   }
-
 };

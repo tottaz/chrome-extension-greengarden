@@ -23,7 +23,7 @@ Greengarden.ServerModel = {
    * Requests the user's preferences for the extension.
    *
    * @param callback {Function(options)} Callback on completion.
-   *     workspaces {dict[]} See Greengarden.Options for details.
+   *     categories {dict[]} See Greengarden.Options for details.
    */
   options: function(callback) {
     callback(Greengarden.Options.loadOptions());
@@ -38,50 +38,50 @@ Greengarden.ServerModel = {
   isLoggedIn: function(callback) {
     chrome.cookies.get({
       url: Greengarden.ApiBridge.baseApiUrl(),
-      name: 'ticket'
+      name: 'gp_media'
     }, function(cookie) {
       callback(!!(cookie && cookie.value));
     });
   },
 
   /**
-   * Get the URL of a task given some of its data.
+   * Get the URL of a media item and given some of its data.
    *
-   * @param task {dict}
+   * @param newsitem {dict}
    * @param callback {Function(url)}
    */
-  taskViewUrl: function(task, callback) {
-    // We don't know what pot to view it in so we just use the task ID
+  newsitemViewUrl: function(newsitem, callback) {
+    // We don't know what pot to view it in so we just use the newsid ID
     // and Greengarden will choose a suitable default.
     var options = Greengarden.Options.loadOptions();
-    var pot_id = task.id;
-    var url = 'https://' + options.greengarden_host_port + '/0/' + pot_id + '/' + task.id;
+    var pot_id = newsitem.id;
+    var url = 'http://' + options.greengarden_host_port + '/api/1/newsitem/' + pot_id + '/' + newsitem.id;
     callback(url);
   },
 
   /**
-   * Requests the set of workspaces the logged-in user is in.
+   * Requests the set of categories the logged-in user is in.
    *
-   * @param callback {Function(workspaces)} Callback on success.
-   *     workspaces {dict[]}
+   * @param callback {Function(categories)} Callback on success.
+   *     categories {dict[]}
    */
-  workspaces: function(callback, errback) {
+  categories: function(callback, errback) {
     var self = this;
-    Greengarden.ApiBridge.request("GET", "/workspaces", {},
+    Greengarden.ApiBridge.request("GET", "/categories", {},
         function(response) {
           self._makeCallback(response, callback, errback);
         });
   },
 
   /**
-   * Requests the set of users in a workspace.
+   * Requests the set of users in a categories.
    *
    * @param callback {Function(users)} Callback on success.
    *     users {dict[]}
    */
   users: function(workspace_id, callback) {
     var self = this;
-    Greengarden.ApiBridge.request("GET", "/workspaces/" + workspace_id + "/users", {},
+    Greengarden.ApiBridge.request("GET", "/categories/" + workspace_id + "/users", {},
         function(response) {
           self._makeCallback(response, callback);
         });
@@ -111,15 +111,15 @@ Greengarden.ServerModel = {
   /**
    * Makes an Greengarden API request to add a news item in the system.
    *
-   * @param task {dict} Task fields.
+   * @param newsitem {dict} Task fields.
    * @param callback {Function(response)} Callback on success.
    */
-  createTask: function(workspace_id, task, callback, errback) {
+  createNewsitem: function(workspace_id, newsitem, callback, errback) {
     var self = this;
     Greengarden.ApiBridge.request(
         "POST",
-        "/workspaces/" + workspace_id + "/tasks",
-        task,
+        "/newsitems/" + workspace_id + "/newsitems",
+        newsitem,
         function(response) {
           self._makeCallback(response, callback, errback);
         });
